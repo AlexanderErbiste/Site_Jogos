@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale+1.0">
+
+        <title>Mário Jump</title>
+		
+		
+		<style>
+		
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			.game-board {
+				width: 100%;
+				height: 500px;
+				border-bottom: 15px solid #8B4513;
+				margin: 0 auto;
+				position: relative;
+				overflow: hidden;
+				background: linear-gradient(#363636, #FFFAFA);
+			}
+
+			.fantasma {
+				position: absolute;
+				bottom: 0;
+				width: 100px;
+				animation: fantasma-animation 2s infinite linear;
+			}
+
+			.mario {
+				width:  150px;
+				position: absolute;
+				bottom: -37px;
+			} 
+			
+			.jump {
+				animation: jump 500ms ease-out;
+			} 
+
+			@keyframes fantasma-animation {
+				from {
+					right: -80px;
+				}
+				
+				to {
+					right: 100%;
+				}
+			
+			}
+			
+			@keyframes jump { 
+				
+				0% {
+					bottom: 0;
+				}
+				
+				40% {
+					bottom: 180px;
+				}
+				
+				50% {
+					bottom: 180px;
+				}
+				
+				60% {
+					bottom: 180px;
+				}
+				
+				100% {
+					bottom: 0;
+				}
+				
+			}
+		
+		</style>
+		
+    </head>
+
+	
+    <body>
+		 
+        <div class="game-board">
+
+            <img src="img_mario/fantasma.png" class="fantasma">
+            <img src="img_mario/mario.gif" class="mario">
+
+        </div>
+		
+		<script>
+		
+			const mario = document.querySelector('.mario');
+			const fantasma = document.querySelector('.fantasma');
+
+			const jump = () => {
+				mario.classList.add('jump');
+				
+				setTimeout(() => {
+				
+					mario.classList.remove('jump');
+					}, 500);
+			}
+			
+			const loop = setInterval (() => {
+			
+				console.log('loop')
+			
+				const fantasmaPosition = fantasma.offsetLeft;
+				const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+				
+				if (fantasmaPosition <= 80 && fantasmaPosition > 0 && marioPosition <100 )
+				{
+					fantasma.style.animation = 'none';
+					fantasma.style.left = `${fantasmaPosition}px`;
+					
+					mario.style.animation = 'none';
+					mario.style.bottom = `${fantasmaPosition}px`;
+					
+					mario.src = 'img_mario/game-over.png'
+					mario.style.width = '80px';
+					mario.style.marginLeft = '50px';
+					
+					clearInterval(loop);
+				}
+				
+			}, 10);
+
+			document.addEventListener('keydown', jump);
+			
+		</script>
+
+		
+    </body>
+	
+	
+
+</html>

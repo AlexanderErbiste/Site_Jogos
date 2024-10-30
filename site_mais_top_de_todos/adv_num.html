@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+		<title>Exercício HTML</title>
+			<style>
+				
+				body {
+					background-color: #808080;
+					font-family: 'Arial', sans-serif;
+					background-image: url('img_adv/quiz.jpeg');
+					background-position: right, left;
+					background-repeat: repeat;
+					background-size: contain;
+					background-attachment: fixed;
+				}
+
+				ul {
+					list-style-type: none;
+					margin: 0;
+					padding: 0;
+					overflow: hidden;
+					background-color: #FF4500;
+				}
+
+				li {
+					float: left;
+				}
+
+				li a {
+					display: block;
+					color: #FFF;
+					text-align: center;
+					padding: 14px 20px;
+					text-decoration: none;
+					font-size: 18px;
+					font-weight: bold;
+					border-radius: 5px;
+					transition: background-color 0.3s;
+				}
+
+				li a:hover:not(.active) {
+					background-color: #111;
+				}
+
+				.active {
+					background-color: #000;
+				}
+
+				.container {
+					max-width: 800px;
+					margin: auto;
+					background: rgba(255, 255, 255, 0.8);
+					padding: 20px;
+					border-radius: 10px;
+				}
+
+				img {
+					width: 100%;
+					height: auto;
+					border-radius: 10px;
+					margin-bottom: 20px;
+				}
+				
+				.imagem {
+					width: 575px;
+					height: auto;
+					border-radius: 10px;
+					margin-bottom: 20px;
+				}
+
+				h1, h2, h3 {
+					color: #333;
+				}
+
+				.resultado {
+					text-align: center;
+					margin-top: 20px;
+					background-color: #FFF;
+					padding: 20px;
+					border-radius: 10px;
+				}
+
+				.back-btn {
+					display: inline-block;
+					margin-top: 20px;
+					padding: 10px 20px;
+					background-color: #FF4500;
+					color: white;
+					font-weight: bold;
+					text-decoration: none;
+					border-radius: 5px;
+					cursor: pointer;
+				}
+
+				.card {
+					background-color: #4682B4;
+					border: 2px solid black;
+					border-radius: 10px;
+					padding: 20px;
+					color: white;
+					text-align: center;
+				}
+
+				.card img {
+					max-width: 100%;
+					height: auto;
+				}
+
+				button {
+					display: block;
+					width: 100%;
+					padding: 10px;
+					background-color: #FF4500;
+					color: white;
+					border: none;
+					border-radius: 5px;
+					font-size: 16px;
+					cursor: pointer;
+					transition: background-color 0.3s ease;
+				}
+
+				button:hover {
+					background-color: #000;
+				}
+				
+				
+			</style>
+	</head>
+
+	<body>
+
+		<ul>
+			<li><a href="home.html">Home</a></li>
+			<li><a href="adv_img.html">Adivinhação de Imagem</a></li>
+			<li><a href="adv_num.html" class="active">Adivinhação de Número</a></li>
+			<li><a href="quiz.html">Quiz</a></li>
+			<li><a href="dev.html">Desenvolvedores</a></li>
+		</ul>
+
+			<div class="container">
+			
+				<center>
+				
+					<h1>Jogo da Adivinhação - Escolha um número de 1 até 31</h1>
+					<form name="formAdivinha" method="get">
+						<h2>Verifique se o seu número aparece nas imagens abaixo. Se apareceu, marquem a opção "Sim"</h2>
+
+						<div class="card">
+							<img src="img_num/carta1.png" />
+							<input type="radio" name="op1" value="Sim">Sim
+							<input type="radio" name="op1" value="Não" checked>Não<P>
+						</div><br>
+
+						<div class="card">
+							<img src="img_num/carta2.png" />
+							<input type="radio" name="op2" value="Sim">Sim
+							<input type="radio" name="op2" value="Não" checked>Não<P>
+						</div><br>
+
+						<div class="card">
+							<img src="img_num/carta3.png" />
+							<input type="radio" name="op3" value="Sim">Sim
+							<input type="radio" name="op3" value="Não" checked>Não<P>
+						</div><br>
+
+						<div class="card">
+							<img src="img_num/carta4.png" />
+							<input type="radio" name="op4" value="Sim">Sim
+							<input type="radio" name="op4" value="Não" checked>Não<P>
+						</div><br>
+
+						<div class="card">
+							<img src="img_num/carta5.png" />
+							<input type="radio" name="op5" value="Sim">Sim
+							<input type="radio" name="op5" value="Não" checked>Não<P>
+						</div><br>
+
+						<button type="button" name="verifica" onclick="respostas()">Ver o Resultado</button><br>
+						<button type="reset" name="limpar">Limpar Respostas</button>
+					</form>
+					
+				</center>
+				
+			</div>
+
+			<script>
+			
+				function respostas() {
+				
+					var acertos = 0;
+					var resp1 = document.formAdivinha.op1.value;
+					var resp2 = document.formAdivinha.op2.value;
+					var resp3 = document.formAdivinha.op3.value;
+					var resp4 = document.formAdivinha.op4.value;
+					var resp5 = document.formAdivinha.op5.value;
+
+					if (resp1 == "Sim") acertos += 1;
+					if (resp2 == "Sim") acertos += 2;
+					if (resp3 == "Sim") acertos += 4;
+					if (resp4 == "Sim") acertos += 8;
+					if (resp5 == "Sim") acertos += 16;
+
+					var container = document.querySelector('.container');
+					container.innerHTML = '';
+					
+					var resultadoHTML = '<div class="resultado">';
+					resultadoHTML += '<h2>O número que você pensou foi o ' + acertos + '</h2>';
+					resultadoHTML += '<img class="imagem" src="img_num/vidente.jpg"/>';
+					resultadoHTML += '<a href="adv_num.html" class="back-btn">Voltar aos Números</a>';
+					resultadoHTML += '</div>';
+
+					container.innerHTML = resultadoHTML;
+				}
+				
+			</script>
+
+	</body>
+	
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+			<title>Exercício HTML</title>
+			<style>
+			
+				body {
+					background-color: #808080;
+					font-family: 'Arial', sans-serif;
+					background-image: url('img_quiz/quiz.jpeg');
+					background-position: right, left;
+					background-repeat: repeat;
+					background-size: contain;
+					background-attachment: fixed;
+				}
+				
+				ul {
+					list-style-type: none;
+					margin: 0;
+					padding: 0;
+					overflow: hidden;
+					background-color: #FF4500;
+				}
+
+				li {
+					float: left;
+				}
+
+				li a {
+					display: block;
+					color: #FFF;
+					text-align: center;
+					padding: 14px 20px;
+					text-decoration: none;
+					font-size: 18px;
+					font-weight: bold;
+					border-radius: 5px;
+					transition: background-color 0.3s;
+				}
+
+				li a:hover:not(.active) {
+					background-color: #111;
+				}
+
+				.active {
+					background-color: #000;
+				}
+
+				.container {
+					max-width: 800px;
+					margin: auto;
+					background: rgba(255, 255, 255, 0.8);
+					padding: 20px;
+					border-radius: 10px;
+				}
+
+				.question {
+					margin: 20px 0;
+					
+				}
+
+				.question li {
+					font-weight: bold;
+				}
+
+				img {
+					width: 100%;
+					height: auto;
+					border-radius: 10px;
+					margin-bottom: 20px;
+				}
+
+				.resultado {
+					margin-top: 20px;
+					background-color: #FFF;
+					padding: 20px;
+					border-radius: 10px;
+				}
+
+				.back-btn {
+					display: inline-block;
+					margin-top: 20px;
+					padding: 10px 20px;
+					background-color: #FF4500;
+					color: #FFF;
+					font-weight: bold;
+					text-decoration: none;
+					border-radius: 5px;
+					cursor: pointer;
+				}
+				
+				button {
+					display: block;
+					width: 100%;
+					padding: 10px;
+					background-color: #000;
+					color: white;
+					border: none;
+					border-radius: 5px;
+					font-size: 16px;
+					cursor: pointer;
+					transition: background-color 0.3s ease;
+				}
+
+				button:hover {
+					background-color: #B22222;
+				}
+				
+				.card {
+					background-color: #B22222;
+					border: 2px solid black;
+					border-radius: 10px;
+					padding: 40px;
+					margin: 10px;
+					color: white;
+					text-align: left;
+					width: 625px;
+					height: auto;
+				}
+				
+			</style>
+	</head>
+
+	<body>
+
+		<ul>
+			<li><a href="home.html"> Home </a></li>
+			<li><a href="adv_img.html"> Adivinhação de Imagem </a></li>
+			<li><a href="adv_num.html"> Adivinhação de Número </a></li>
+			<li><a href="quiz.html" class="active"> Quiz </a></li>
+			<li><a href="dev.html"> Desenvolvedores </a></li>
+		</ul>
+
+		<div class="container">
+			<img src="img_quiz/marvel.jpg" alt="Marvel" />
+
+			<script>
+				var perguntas = [
+				
+					"Qual foi o primeiro filme do Universo Cinematográfico Marvel (MCU)?",
+					"Qual das alternativas corresponde a pedra do infinito da cor Verde ?",
+					"Qual personagem é capaz de controlar metais ?",
+					"Qual foi o filme do UCM em que o Homem-Aranha apareceu pela primeira vez ?",
+					"Qual o nome do dispositivo acoplado no peito do Tony Stark ?",
+					"Quem é o principal vilão da Saga do Infinito ?",
+					"Quem foi o Primeiro Vingador ?",
+					"Qual é o personagem é chamado de 'Mercenário Tagarela' ?",
+					"Qual é o material usado para criar o escudo do Capitão América ?",
+					"Qual o nome do melhor amigo do Steve Rogers ?",
+					"Quem é o diretor da S.H.I.E.L.D.?",
+					"Quem é o fundador dos X-Men ?",
+					"Qual mutante tem a capacidade de se teletransportar ?",
+					"Qual a identidade do Wolverine ?",
+					"Qual mutante é conhecido por sua habilidade de absorver poderes de outros ?",
+					"Qual personagem possui um esqueleto de Adamantium ?"
+				
+				];
+				
+
+				var respostas = [
+					"Homem de Ferro",
+					"Pedra do Tempo",
+					"Magneto",
+					"Capitão América, Guerra Civil",
+					"Reator Arc",
+					"Thanos",
+					"Steve Rogers",
+					"Wade Wilson",
+					"Vibranium",
+					"Bucky Barnes",
+					"Nick Fury",
+					"Charles Xavier",
+					"Noturno",
+					"Logan",
+					"Vampira",
+					"Wolverine"
+				];
+
+				var alternativas = [
+					["Thor", "O Incrível Hulk", "Homem de Ferro", "Homem-Aranha", "Capitão América, O Primeiro Vingador"],
+					["Pedra da Realidade", "Pedra do Poder", "Pedra da Alma", "Pedra da Mente", "Pedra do Tempo"],
+					["Homem de Ferro", "Magneto", "Thor", "Wolverine", "Dr. Octopus"],
+					["Vingadores, Guerra Infinita", "Capitão América, Guerra Civil", "Homem de Ferro 3", "Doutor Estranho", "N.D.A"],
+					["Reator Arc", "Tesseract", "Mark 42", "Imã de Plasma", "Mjönir"],
+					["Ultron", "Hela", "Thanos", "Loki", "Caveira Vermelha"],
+					["Steve Rogers", "Capitã Marvel", "Bruce Banner", "Tony Stark", "Thor"],
+					["Peter Parker", "Scott Lang", "Wade Wilson", "Mercúrio", "Peter Quill"],
+					["Adamantium", "Titânio", "Ferro Maciço", "Vibranium", "Prata com Ouro"],
+					["Nick Fury", "Natasha Romanov", "Tony Stark", "Bucky Barnes", "Sam Wilson"],
+					["Agente Coulson", "Maria Hill", "Howard Stark", "Peggy Carter", "Nick Fury"],
+					["Wolverine", "Charles Xavier", "Ciclope", "Hank McCoy", "Magneto"],
+					["Wanda Maximoff", "Remy Lebeau", "Tempestade", "Vampira", "Noturno"],
+					["Wade Wilson", "Stryker", "Logan", "Eric Lehnsherr", "Scott Summers"],
+					["Vampira", "Lince Negra", "Mística", "Wanda Maximoff", "Jubileu"],
+					["Wolverine", "Colossus", "Fanático", "Mercúrio", "Magneto"]
+				];
+
+				document.write('<form name="formQuizz">');
+				document.write('<ol>');
+
+				for (let i = 0; i < perguntas.length; i++) {
+					
+					document.write('<div class="card">');
+						document.write('<div class="question">');
+						document.write('<li>' + perguntas[i] + '</li></br>');
+						alternativas[i].forEach(alternativa => {
+							document.write('<br></br><input type="radio" name="r' + i + '" value="' + alternativa + '">' + alternativa + '<br></br>');
+						});
+						document.write('</div>');
+					document.write('</div>');
+				}
+
+				document.write('</ol>');
+				document.write('<button type="button" onclick="verResultados()">Ver Resultado</button><br>');
+				document.write('<button type="reset">Limpar Respostas</button>');
+				document.write('</form>');
+
+				function verResultados() {
+					var acertos = 0;
+					var erros = [];
+					var resultado = "";
+					var todasRespondidas = true;
+
+					for (let i = 0; i < respostas.length; i++) {
+						var escolha = document.formQuizz['r' + i].value;
+
+						if (!escolha) {
+							todasRespondidas = false;
+							break;
+						}
+
+						if (escolha === respostas[i]) {
+							acertos++;
+						} else {
+							erros.push(`Pergunta: "<b>${perguntas[i]}</b>" - Sua resposta: "${escolha}" - Correta: "<b>${respostas[i]}</b>"<br>`);
+						}
+					}
+
+					if (todasRespondidas) {
+						var porcentagem = (acertos / respostas.length) * 100;
+						resultado += 'Total de Acertos: ' + acertos + ' de ' + respostas.length + '<br>';
+						resultado += 'Porcentagem: ' + Math.round(porcentagem) + '%<br><br>';
+
+						if (erros.length > 0) {
+							resultado += '<h3>Respostas Incorretas:</h3><br>' + erros.join('<br>') + '<br>';
+						} 
+						
+						else {
+							resultado += 'Parabéns! Você acertou todas!';
+						}
+
+						document.body.innerHTML = '<div class="resultado">' + resultado + '</div>';
+						document.body.innerHTML += '<a href="quiz.html" class="back-btn">Voltar ao Quiz</a>';
+					} 
+					
+					else {
+
+						alert('Por favor, responda todas as perguntas antes de ver o resultado.');
+					}
+				}
+				
+			</script>
+			
+		</div>
+
+	</body>
+	
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+			<title>Exercício HTML</title>
+			<style>
+			
+				body {
+					background-color: #808080;
+					font-family: 'Arial', sans-serif;
+				}
+
+				ul {
+					list-style-type: none;
+					margin: 0;
+					padding: 0;
+					overflow: hidden;
+					background-color: #FF4500;
+				}
+
+				li {
+					float: left;
+				}
+
+				li a {
+					display: block;
+					color: #FFF;
+					text-align: center;
+					padding: 14px 20px;
+					text-decoration: none;
+					font-family: 'Arial', sans-serif;
+					font-size: 18px;
+					font-weight: bold;
+					border-radius: 5px;
+					transition: background-color 0.3s;
+				}
+
+				li a:hover:not(.active) {
+					background-color: #111;
+				}
+
+				.active {
+					background-color: #000;
+				}
+
+				.carousel {
+					position: relative;
+					max-width: 800px; 
+					margin: auto;
+					overflow: hidden;
+				}
+
+				.carousel-images {
+					display: flex;
+					transition: transform 0.5s ease;
+				}
+
+				.carousel-image {
+					min-width: 100%;
+					height: 600px;
+				}
+
+				.carousel-buttons {
+					position: absolute;
+					top: 50%;
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					transform: translateY(-50%);
+				}
+
+				.btn {
+					background-color: rgba(0, 0, 0, 0.5);
+					color: white;
+					border: none;
+					padding: 10px;
+					cursor: pointer;
+				}
+
+				.dev-names {
+					display: flex;
+					justify-content: center;
+					margin-top: 10px;
+					font-size: 20px;
+					color: #FFF;
+				}
+
+				.dev-name {
+					display: none; /* Inicialmente escondido */
+					width: 100%; /* Ocupa toda a largura disponível */
+					text-align: center;
+				}
+
+				.active-name {
+					display: block; /* Exibe o nome correspondente à imagem ativa */
+				}
+				
+			</style>
+		
+	</head>
+
+	<body style="background-color: #000">
+
+		<ul>
+			<li><a href="home.html"> Home </a></li>
+			<li><a href="adv_img.html"> Adivinhação de Imagem </a></li>
+			<li><a href="adv_num.html"> Adivinhação de Número </a></li>
+			<li><a href="quiz.html"> Quiz </a></li>
+			<li><a href="dev.html" class="active"> Desenvolvedores </a></li>
+		</ul>
+
+		<div class="carousel">
+			<div class="carousel-images">
+				<img class="carousel-image" src="img_dev/alexander.png" alt="Imagem 1" />
+				<img class="carousel-image" src="img_dev/fabricio.png" alt="Imagem 2" />
+				<img class="carousel-image" src="img_dev/vitor.png" alt="Imagem 3" />
+				<img class="carousel-image" src="img_dev/walther.png" alt="Imagem 4" />
+			</div>
+			
+			<div class="carousel-buttons">
+				<button class="btn" id="prevBtn">❮</button>
+				<button class="btn" id="nextBtn">❯</button>
+			</div>
+		</div>
+
+		<div class="dev-names">
+			<div class="dev-name active-name">Alexander</div>
+			<div class="dev-name">Fabrício</div>
+			<div class="dev-name">Vitor</div>
+			<div class="dev-name">Walther</div>
+		</div>
+
+		<script>
+			let currentIndex = 0;
+
+			const images = document.querySelectorAll('.carousel-image');
+			const names = document.querySelectorAll('.dev-name');
+			const totalImages = images.length;
+
+			function updateCarousel() {
+				const offset = -currentIndex * 100;
+				document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
+				names.forEach((name, index) => {
+					name.classList.remove('active-name'); // Remove a classe ativa de todos os nomes
+					if (index === currentIndex) {
+						name.classList.add('active-name'); // Adiciona a classe ativa ao nome correspondente
+					}
+				});
+			}
+
+			document.getElementById('nextBtn').addEventListener('click', () => {
+				currentIndex = (currentIndex + 1) % totalImages;
+				updateCarousel();
+			});
+
+			document.getElementById('prevBtn').addEventListener('click', () => {
+				currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+				updateCarousel();
+			});
+			
+			setInterval(() => {
+				currentIndex = (currentIndex + 1) % totalImages;
+				updateCarousel();
+			}, 2000);
+		</script>
+
+	</body>
+
+</html>
